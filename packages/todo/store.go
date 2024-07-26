@@ -24,8 +24,8 @@ func (s *Store) CreateTodo(payload types.TodoPayload) error {
 		Description: payload.Description,
 		Category:    payload.Category,
 		IsCompleted: payload.IsConpleted,
-		CreatedAt:   time.Now().Local().Add(time.Hour * 7), // THIS IS FOR VIETNAME LOCALTIME TO SWITCH TO UTC SIMPLY USE TIME.NOW()
-		UpdatedAt:   time.Now().Local().Add(time.Hour * 7), // THIS IS FOR VIETNAME LOCALTIME TO SWITCH TO UTC SIMPLY USE TIME.NOW()
+		CreatedAt:   time.Now().Local().Add(time.Hour * 7),
+		UpdatedAt:   time.Now().Local().Add(time.Hour * 7),
 		UserID:      payload.UserId,
 	}
 
@@ -104,11 +104,11 @@ func (s *Store) GetTodoById(id string) (*types.Todo, error) {
 	return todo, nil
 }
 
-func (s *Store) GetTodoByDate(date string) (*[]types.Todo, error) {
+func (s *Store) GetTodoByDate(date string, id string) (*[]types.Todo, error) {
 	dateStart := fmt.Sprint(date + " 00:00:00")
 	dateEnd := fmt.Sprint(date + " 23:59:00")
 	todo := new([]types.Todo)
-	err := s.db.Select(todo, "SELECT * FROM todos WHERE created_at BETWEEN ? AND ? ", dateStart, dateEnd)
+	err := s.db.Select(todo, "SELECT * FROM todos WHERE created_at BETWEEN ? AND ? AND user_id = ? ", dateStart, dateEnd, id)
 	if err != nil {
 		return nil, err
 	}

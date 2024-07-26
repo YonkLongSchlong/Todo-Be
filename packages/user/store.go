@@ -49,7 +49,7 @@ func (s *Store) CreateUser(payload types.RegisterPayload) error {
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
-	_, err = s.db.NamedExec("INSERT INTO users(id, first_name, last_name, email, password, created_at, updated_at) VALUES (:id, :first_name, :last_name, :email,:password,:created_at, :updated_at)", user)
+	_, err = s.db.NamedExec("INSERT INTO users(id, first_name, last_name, email, password, avatar, created_at, updated_at) VALUES (:id, :first_name, :last_name, :email,:password, :avatar, :created_at, :updated_at)", user)
 	if err != nil {
 		return err
 	}

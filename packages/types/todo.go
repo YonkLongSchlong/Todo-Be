@@ -27,5 +27,5 @@ type TodoStore interface {
 	UpdateTodo(id string, userId string, payload TodoPayload) error
 	SetIsCompledtedTodo(id string, userId string) error
 	GetTodoById(id string) (*Todo, error)
-	GetTodoByDate(date string) (*[]Todo, error)
+	GetTodoByDate(date string, id string) (*[]Todo, error)
 }

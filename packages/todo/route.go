@@ -157,7 +157,7 @@ func (r *TodoRoute) GetTodoByDate(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	todo, err := r.store.GetTodoByDate(jsonMap["date"])
+	todo, err := r.store.GetTodoByDate(jsonMap["date"], jsonMap["id"])
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
